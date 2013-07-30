@@ -76,10 +76,10 @@ $titleBlock->show();
         </tr>
         <tr>
             <td>
-                <input class="text" type="submit" value="Volver">
+                <input class="text" type="submit" value="cancelar">
             </td>
             <td align="right">
-                <input class="text" type="submit" value="Enviar">
+                <input class="text" type="submit" value="enviar">
             </td>
         </tr>
     </table>

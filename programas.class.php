@@ -5,10 +5,10 @@ class CPrograma extends w2p_Core_BaseObject {
     public $programa_id = 0;
     public $programa_name = '';
     public $programa_description = '';
+    public $programa_proyecto = 0;
     public $programa_created = NULL;
     public $programa_updated = NULL;
-    public $programa_mitigation_date = NULL;
-
+    
     public function __construct() {
         parent::__construct('programas', 'programa_id');
     }
@@ -28,14 +28,15 @@ class CPrograma extends w2p_Core_BaseObject {
 
     public function check() {
         $errorArray = array();
-        $baseErrorMsg = get_class($this) . '::store-check failed - ';
+        $baseErrorMsg = get_class($this) . '::Error al guardar los datos - ';
 
         if ('' == trim($this->programa_name)) {
-            $errorArray['programa_name'] = $baseErrorMsg . 'programa name is not set';
+            $errorArray['programa_name'] = $baseErrorMsg . 'No está definido el nombre';
         }
         if ('' == trim($this->programa_description)) {
-            $errorArray['programa_description'] = $baseErrorMsg . 'programa description is not set';
+            $errorArray['programa_description'] = $baseErrorMsg . 'No está definida la descripción';
         }
+        var_dump($this);
         return $errorArray;
     }
 
@@ -50,7 +51,6 @@ class CPrograma extends w2p_Core_BaseObject {
 
         $q = new DBQuery;
         $this->programa_updated = $q->dbfnNowWithTZ();
-        //$this->programa_mitigation_date = (2 == $this->programa_status) ? $q->dbfnNowWithTZ() : '';
         if ($this->programa_id && $perms->checkModuleItem('retos', 'edit', $this->programa_id)) {
             if (($msg = parent::store())) {
                 return $msg;

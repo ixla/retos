@@ -51,7 +51,7 @@ $projects = arrayMerge(array('0' => $AppUI->_('All', UI_OUTPUT_JS)), $projects);
 ?>
 <script src="./modules/retos/addedit.js" type="text/javascript"></script>
 
-<form name="form" action="?m=retos" method="post" accept-charset="utf-8">
+<form name="medidaForm" action="?m=retos" method="post" accept-charset="utf-8">
     <input type="hidden" name="dosql" value="do_medida_aed" />
     <input type="hidden" name="del" value="0" />
     <input type="hidden" name="medida_id" value="<?php echo $medida->medida_id; ?>" />
@@ -110,10 +110,10 @@ $projects = arrayMerge(array('0' => $AppUI->_('All', UI_OUTPUT_JS)), $projects);
         </tr>
         <tr>
             <td>
-                <input class="text" type="submit" value="back">
+                <input class="text" type="submit" value="cancelar">
             </td>
             <td align="right">
-                <input class="text" type="submit" value="submit">
+                <input class="text" type="submit" value="enviar">
             </td>
         </tr>
     </table>
