@@ -97,35 +97,15 @@ function delIt(){
                     <td class="hilite"><strong><?php echo $reto->reto_name; ?></strong></td>
                 </tr>
                 <tr>
-                    <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Owner');?>:</td>
-                    <td class="hilite"><?php echo $reto->reto_owner_name;?></td>
+                    <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Sigla');?>:</td>
+                    <td class="hilite"><?php echo $reto->reto_sigla;?></td>
                 </tr>
                 <tr>
-                    <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Probability'); ?>:</td>
-                    <td class="hilite"><?php echo $retoProbability[$reto->reto_probability]; ?></td>
+                    <td align="right"><?php echo $AppUI->_('Reto Sigla'); ?>:</td>
+                    <td class="hilite"><?php echo $reto->reto_sigla; ?></td>
                 </tr>
-                <tr>
-                    <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Impact'); ?>:</td>
-                    <td class="hilite"><?php echo $retoImpact[$reto->reto_impact]; ?></td>
-                </tr>
-                <tr>
-                    <td align="right"><?php echo $AppUI->_('Reto Priority'); ?>:</td>
-                    <td class="hilite"><?php echo $reto->reto_priority; ?></td>
-                </tr>
-                <tr>
-                    <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Status'); ?>:</td>
-                    <td class="hilite"><?php echo $retoStatus[$reto->reto_status]; ?></td>
-                </tr>
-                <tr>
+                 <tr>
                     <td nowrap="nowrap" colspan="2"><strong><?php echo $AppUI->_('Dates and Targets'); ?></strong></td>
-                </tr>
-                <tr>
-                    <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Mitigation Date');?>:</td>
-                    <td class="hilite">
-                        <?php
-                            echo intval( $reto->reto_mitigation_date ) ? $AppUI->formatTZAwareTime($reto->reto_mitigation_date,  $format) : '-';
-                        ?>
-                    </td>
                 </tr>
                 <tr>
                     <td align="right" nowrap="nowrap"><?php echo $AppUI->_('Create Date');?>:</td>

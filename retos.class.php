@@ -5,16 +5,12 @@ class CReto extends w2p_Core_BaseObject {
     public $reto_id = 0;
     public $reto_project = 0;
     public $reto_task = 0;
-    public $reto_owner = 0;
     public $reto_name = '';
     public $reto_description = '';
-    public $reto_probability = 0;
-    public $reto_priority = 0;
-    public $reto_status = 0;
-    public $reto_impact = 0;
+    public $reto_sigla = '';
     public $reto_created = NULL;
     public $reto_updated = NULL;
-    public $reto_mitigation_date = NULL;
+//    public $reto_mitigation_date = NULL;
 
     public function __construct() {
         parent::__construct('retos', 'reto_id');
@@ -35,16 +31,17 @@ class CReto extends w2p_Core_BaseObject {
 
     public function check() {
         $errorArray = array();
-        $baseErrorMsg = get_class($this) . '::store-check failed - ';
+        
+        $baseErrorMsg = get_class($this) . '::Error al guardar los datos - ';
 
         if ('' == trim($this->reto_name)) {
-            $errorArray['reto_name'] = $baseErrorMsg . 'reto name is not set';
+            $errorArray['reto_name'] = $baseErrorMsg . 'No está definido el nombre';
         }
         if ('' == trim($this->reto_description)) {
-            $errorArray['reto_description'] = $baseErrorMsg . 'reto description is not set';
+            $errorArray['reto_description'] = $baseErrorMsg . 'No está definida la descripcion';
         }
-        if (0 == (int) $this->reto_owner) {
-            $errorArray['reto_owner'] = $baseErrorMsg . 'reto owner is not set';
+        if ('' == trim( $this->reto_sigla)) {
+            $errorArray['reto_sigla'] = $baseErrorMsg . 'No está definida la sigla';
         }
 
         return $errorArray;
@@ -58,10 +55,9 @@ class CReto extends w2p_Core_BaseObject {
         if (count($errorMsgArray) > 0) {
             return $errorMsgArray;
         }
-
         $q = new DBQuery;
         $this->reto_updated = $q->dbfnNowWithTZ();
-        $this->reto_mitigation_date = (2 == $this->reto_status) ? $q->dbfnNowWithTZ() : '';
+//        $this->reto_mitigation_date = (2 == $this->reto_status) ? $q->dbfnNowWithTZ() : '';
         if ($this->reto_id && $perms->checkModuleItem('retos', 'edit', $this->reto_id)) {
             if (($msg = parent::store())) {
                 return $msg;
@@ -164,7 +160,7 @@ class CReto extends w2p_Core_BaseObject {
         $search['table_link'] = 'index.php?m=retos&amp;reto_id='; // first part of link
         $search['table_title'] = 'retos';
         $search['table_orderby'] = 'reto_name';
-        $search['search_fields'] = array('reto_name', 'reto_description', 'reto_note_description');
+        $search['search_fields'] = array('reto_name', 'reto_description', 'reto_note_description','reto_sigla');
         $search['display_fields'] = $search['search_fields'];
         $search['table_joins'] = array(array('table' => 'reto_notes',
                 'alias' => 'rn', 'join' => 'r.reto_id = rn.reto_note_reto'));

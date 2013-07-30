@@ -32,6 +32,8 @@ class CSetupRetos {
             `reto_name` varchar(255) default NULL,
             `reto_description` text,
             `reto_sigla` varchar(25) default NULL,
+            `reto_created` datetime NOT NULL,
+            `reto_updated` datetime NOT NULL,
             `reto_notes` text,
             PRIMARY KEY  (`reto_id`))
             ENGINE=MyISAM';
@@ -58,6 +60,8 @@ class CSetupRetos {
             `medida_name` varchar(255) default NULL,
             `medida_description` text,
             `medida_sigla` varchar(25) default NULL,
+            `medida_created` datetime NOT NULL,
+            `medida_updated` datetime NOT NULL,
             `medida_notes` text,
             PRIMARY KEY  (`medida_id`))
             ENGINE=MyISAM';
@@ -70,6 +74,8 @@ class CSetupRetos {
             `programa_id` int(10) unsigned NOT NULL auto_increment,
             `programa_name` varchar(255) default NULL,
             `programa_description` text,
+            `programa_created` datetime NOT NULL,
+            `programa_updated` datetime NOT NULL,
             `programa_notes` text,
             PRIMARY KEY  (`programa_id`))
             ENGINE=MyISAM';
