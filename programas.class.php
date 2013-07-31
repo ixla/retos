@@ -36,7 +36,7 @@ class CPrograma extends w2p_Core_BaseObject {
         if ('' == trim($this->programa_description)) {
             $errorArray['programa_description'] = $baseErrorMsg . 'No está definida la descripción';
         }
-        var_dump($this);
+        
         return $errorArray;
     }
 
