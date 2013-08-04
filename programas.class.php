@@ -8,7 +8,7 @@ class CPrograma extends w2p_Core_BaseObject {
     public $programa_proyecto = 0;
     public $programa_created = NULL;
     public $programa_updated = NULL;
-    
+
     public function __construct() {
         parent::__construct('programas', 'programa_id');
     }
@@ -20,7 +20,7 @@ class CPrograma extends w2p_Core_BaseObject {
         $q->addQuery('pr.*');
         $q->addQuery('rr.*');
         $q->leftJoin('reto_relaciones', 'rr', 'rr.id = pr.programa_id');
-        $q->leftJoin('projects', 'p', 'p.project_id = rr.project_id');
+        $q->leftJoin('programas', 'p', 'p.programa_id = rr.programa_id');
         $q->addWhere('pr.programa_id = ' . (int) $programasId);
 
         $q->loadObject($this, true, false);
@@ -36,7 +36,7 @@ class CPrograma extends w2p_Core_BaseObject {
         if ('' == trim($this->programa_description)) {
             $errorArray['programa_description'] = $baseErrorMsg . 'No está definida la descripción';
         }
-        
+
         return $errorArray;
     }
 
@@ -92,7 +92,7 @@ class CPrograma extends w2p_Core_BaseObject {
             $q->leftJoin('projects', 'p', 'rr.project_id = p.project_id');
             $q->leftJoin('medidas', 'm', 'm.medida_id = rr.medida_id');
             $q->leftJoin('programas', 'pg', 'pg.programa_id = rr.programa_id');
-    
+
             $results = $q->loadList();
         }
         return $results;
@@ -131,19 +131,20 @@ class CPrograma extends w2p_Core_BaseObject {
         
     }
 
-//    public function getTasks(CAppUI $AppUI, $projectId) {
-//        $results = array();
-//        $perms = $AppUI->acl();
-//
-//        if ($perms->checkModule('tasks', 'view')) {
-//            $q = new DBQuery();
-//            $q->addQuery('t.task_id, t.task_name');
-//            $q->addTable('tasks', 't');
-//            $q->addWhere('task_project = ' . (int) $projectId);
-//            $results = $q->loadHashList('task_id');
+    public function getAllowedProgramas($userId, $activeOnly = true) {
+
+        $q = $this->_query;
+        $q->addTable('programas', 'pr');
+        $q->addQuery('pr.programa_id, programa_name');
+//        if ($activeOnly) {
+//            $q->addWhere('programa_active = 1');
 //        }
-//        return $results;
-//    }
+        $q->addGroup('pr.programa_id');
+        $q->addOrder('programa_name');
+        $this->setAllowedSQL($userId, $q, null, 'pr');
+
+        return $q->loadHashList('programa_id');
+    }
 
     public function hook_search() {
         $search['table'] = 'programas';

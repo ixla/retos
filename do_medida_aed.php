@@ -17,7 +17,7 @@ $result = ($del) ? $obj->delete($AppUI) : $obj->store($AppUI);
 if (is_array($result)) {
     $AppUI->setMsg($result, UI_MSG_ERROR, true);
     $AppUI->holdObject($obj);
-    $AppUI->redirect('m=retos&a=addedit_medidas');
+    $AppUI->redirect('m=retos&a=addedit_medida');
 }
 if ($result) {
     $AppUI->setMsg('Medidas '.$action, UI_MSG_OK, true);
